@@ -17,7 +17,10 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(home: HomeScreen());
+        return MaterialApp(
+          theme: ThemeData(fontFamily: 'Roboto'),
+          home: HomeScreen(),
+        );
       },
     );
   }
