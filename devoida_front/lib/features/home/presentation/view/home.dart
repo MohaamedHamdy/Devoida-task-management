@@ -1,5 +1,5 @@
 import 'package:devoida_front/core/utils/theming/colors.dart';
-import 'package:devoida_front/core/widgets/custom_app_bar.dart';
+import 'package:devoida_front/features/board/presentation/view/BoardTasks.dart';
 import 'package:devoida_front/features/board/presentation/view/board_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const WorkspaceScreen(),
     const BoardScreen(),
     Container(),
-    Container(),
+    const BoardTasks(),
     Container(),
   ];
 
@@ -84,10 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   margin: const EdgeInsets.all(13.0),
                   child: const Center(
-                    child: Icon(
-                      FontAwesomeIcons.plus,
-                      color: Colors.white,
-                    ),
+                    child: Icon(FontAwesomeIcons.plus, color: Colors.white),
                   ),
                 ),
               ),

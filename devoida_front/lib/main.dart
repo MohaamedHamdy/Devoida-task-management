@@ -1,6 +1,4 @@
 import 'package:devoida_front/core/utils/routing/app_router.dart';
-import 'package:devoida_front/features/home/presentation/view/home.dart';
-import 'package:devoida_front/features/home/presentation/view/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
