@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Styles {
   static TextStyle titleStyle = TextStyle(
     fontSize: 18.sp,
-    fontWeight: FontsHelper.medium,
+    fontWeight: FontsHelper.semiBold,
     color: Colors.black,
   );
 

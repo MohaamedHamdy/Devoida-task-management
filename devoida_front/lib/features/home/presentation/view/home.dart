@@ -1,40 +1,117 @@
 import 'package:devoida_front/core/widgets/custom_app_bar.dart';
+import 'package:devoida_front/features/home/presentation/view/widgets/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  final int initialIndex;
+
+  const HomeScreen({super.key, this.initialIndex = 0});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // int currentIndex = 0;
+
+  late int currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.initialIndex;
+  }
+
+  List screens = [
+    const HomeScreenBody(),
+    Container(),
+    Container(),
+    Container(),
+    Container(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomAppBar(
-                leading: Icon(Icons.favorite),
-                title: 'Workspaces',
-                actions: [],
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  Container(
-                    height: 170.h,
-                    width: 250.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.r),
-                      color: Color.fromRGBO(255, 245, 205, 1),
+      body: screens[currentIndex],
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (value) {
+          setState(() {
+            currentIndex = value;
+          });
+        },
+        backgroundColor: Colors.white,
+        elevation: 2.0,
+        // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        indicatorColor: Colors.transparent,
+        selectedIndex: currentIndex,
+        shadowColor: Colors.white,
+        surfaceTintColor: Colors.white,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        destinations: [
+          NavigationDestination(
+            icon: Icon(Iconsax.people, color: Colors.black.withOpacity(0.5)),
+            label: 'Workspace',
+            selectedIcon: const Icon(Iconsax.people, color: Colors.blue),
+          ),
+          NavigationDestination(
+            icon: Icon(
+              FontAwesomeIcons.trello,
+              color: Colors.black.withOpacity(0.5),
+            ),
+            selectedIcon: const Icon(
+              FontAwesomeIcons.trello,
+              color: Colors.blue,
+            ),
+            label: 'Boards',
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 30.0.w),
+            child: NavigationDestination(
+              label: 'Add',
+              icon: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.circle,
+                ),
+                child: Container(
+                  margin: const EdgeInsets.all(13.0),
+                  child: const Center(
+                    child: Icon(
+                      FontAwesomeIcons.plus,
+                      color: Colors.white,
                     ),
                   ),
-                ],
+                ),
               ),
-            ],
+            ),
           ),
-        ),
+          NavigationDestination(
+            icon: Icon(
+              FontAwesomeIcons.creditCard,
+              color: Colors.black.withOpacity(0.5),
+            ),
+            selectedIcon: const Icon(
+              FontAwesomeIcons.creditCard,
+              color: Colors.blue,
+            ),
+            label: 'Cards',
+          ),
+          NavigationDestination(
+            icon: Icon(
+              Iconsax.profile_circle,
+              color: Colors.black.withOpacity(0.5),
+            ),
+            selectedIcon: const Icon(
+              Iconsax.profile_circle5,
+              color: Colors.blue,
+            ),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }

@@ -1,4 +1,6 @@
+import 'package:devoida_front/core/utils/routing/app_router.dart';
 import 'package:devoida_front/features/home/presentation/view/home.dart';
+import 'package:devoida_front/features/home/presentation/view/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,9 +19,11 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return MaterialApp.router(
+          routerConfig: AppRouter.appRouter,
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(fontFamily: 'Roboto'),
-          home: HomeScreen(),
+          // home: KanbanBoardSimple(),
         );
       },
     );
