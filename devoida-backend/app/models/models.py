@@ -17,29 +17,29 @@ class User(Base):
     profile_picture = Column(String(255), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    created_workspaces = relationship("Workspace", back_populates="creator", foreign_keys='Workspace.created_by')
+    # created_workspaces = relationship("Workspace", back_populates="creator", foreign_keys='Workspace.created_by')
 
 
 
-class Workspace(Base):
-    __tablename__ = "workspaces"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(100), nullable=False)
-    description = Column(Text)
-    created_by = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
-    created_at = Column(TIMESTAMP, server_default=func.now())
+# class Workspace(Base):
+#     __tablename__ = "workspaces"
+#     id = Column(Integer, primary_key=True, index=True)
+#     name = Column(String(100), nullable=False)
+#     description = Column(Text)
+#     created_by = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
+#     created_at = Column(TIMESTAMP, server_default=func.now())
 
-    creator = relationship("User", back_populates="created_workspaces")
-    members = relationship("WorkspaceMembership", back_populates="workspace")
+#     creator = relationship("User", back_populates="created_workspaces")
+#     members = relationship("WorkspaceMembership", back_populates="workspace")
 
-class WorkspaceMembership(Base):
-    __tablename__ = "workspace_memberships"
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    workspace_id = Column(Integer, ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False)
-    joined_at = Column(TIMESTAMP, server_default=func.now())
+# class WorkspaceMembership(Base):
+#     __tablename__ = "workspace_memberships"
+#     id = Column(Integer, primary_key=True, index=True)
+#     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+#     workspace_id = Column(Integer, ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False)
+#     joined_at = Column(TIMESTAMP, server_default=func.now())
 
-    __table_args__ = (UniqueConstraint("user_id", "workspace_id"),)
+#     __table_args__ = (UniqueConstraint("user_id", "workspace_id"),)
 
-    user = relationship("User")
-    workspace = relationship("Workspace", back_populates="members")
+#     user = relationship("User")
+#     workspace = relationship("Workspace", back_populates="members")
