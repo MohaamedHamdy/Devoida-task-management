@@ -1,10 +1,7 @@
 from fastapi import APIRouter, Depends, status, HTTPException
-from .. import schemas, database
-from typing import List
+from .. import schemas, database, token
 from app.models import models
 from ..hashing import Hash
-from ..repository import users
-from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
@@ -26,4 +23,5 @@ async def login(request: schemas.Login, db: AsyncSession = Depends(database.get_
         raise HTTPException(status_code=401, detail="Incorrect password")
 
 
-    return user
+    access_token = token.create_access_token(data={"sub": user.email})
+    return {"access_token": access_token, "token_type": "bearer"}
