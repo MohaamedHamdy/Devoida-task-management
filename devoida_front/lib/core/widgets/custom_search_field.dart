@@ -64,6 +64,8 @@ class CustomTextField extends StatelessWidget {
       obscureText: isObsecure ?? false,
       keyboardType: keyboardType,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(0xFF212121),
         isDense: true,
         hintText: hintText,
         constraints: BoxConstraints.tightForFinite(width: width),
