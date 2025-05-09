@@ -22,10 +22,11 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           routerConfig: AppRouter.appRouter,
           debugShowCheckedModeBanner: false,
-          // theme: ThemeData(fontFamily: 'Roboto'),
-          theme: ThemeData.dark(),
-          darkTheme: ThemeData.dark().copyWith(
-
+          // theme: ThemeData(fontFamily: 'Inter'),
+          theme: ThemeData.dark().copyWith(
+            textTheme: ThemeData.dark().textTheme.apply(
+              fontFamily: 'Inter',
+            ),
           ),
           // home: KanbanBoardSimple(),
         );
