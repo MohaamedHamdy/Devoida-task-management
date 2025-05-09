@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.database import engine, Base
-from .routers import users
+from .routers import users, authentication
 
 app = FastAPI()
 
@@ -13,4 +13,5 @@ async def on_startup():
 async def root():
     return {"message": "Task Management API is up!"}
 
+app.include_router(authentication.router)
 app.include_router(users.router)
