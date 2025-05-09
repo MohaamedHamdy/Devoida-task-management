@@ -28,9 +28,10 @@ class CustomAppBar extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             Image.asset(leadingImage),
-            widthSizedBox(6),
+            widthSizedBox(8),
             Text(title, style: titleStyle ?? Styles.titleStyle),
-            Row(children: actions ?? [],),
+            const Spacer(), // Pushes actions to the right
+            if (actions != null) ...actions!,
           ],
         ),
       ),

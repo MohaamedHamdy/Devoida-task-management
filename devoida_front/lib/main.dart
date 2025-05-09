@@ -24,7 +24,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           // theme: ThemeData(fontFamily: 'Roboto'),
           theme: ThemeData.dark(),
-          darkTheme: ThemeData.dark().copyWith(),
+          darkTheme: ThemeData.dark().copyWith(
+
+          ),
           // home: KanbanBoardSimple(),
         );
       },
