@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           routerConfig: AppRouter.appRouter,
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(fontFamily: 'Roboto'),
+          // theme: ThemeData(fontFamily: 'Roboto'),
+          theme: ThemeData.dark(),
+          darkTheme: ThemeData.dark().copyWith(),
           // home: KanbanBoardSimple(),
         );
       },

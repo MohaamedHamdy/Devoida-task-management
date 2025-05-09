@@ -1,3 +1,4 @@
+import 'package:devoida_front/core/utils/theming/colors.dart';
 import 'package:devoida_front/core/widgets/custom_app_bar.dart';
 import 'package:devoida_front/features/home/presentation/view/widgets/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,13 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[currentIndex],
+      backgroundColor: Theme.of(context).colorScheme.surface,
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) {
           setState(() {
             currentIndex = value;
           });
         },
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         elevation: 2.0,
         // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         indicatorColor: Colors.transparent,
@@ -53,18 +55,18 @@ class _HomeScreenState extends State<HomeScreen> {
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         destinations: [
           NavigationDestination(
-            icon: Icon(Iconsax.people, color: Colors.black.withOpacity(0.5)),
+            icon: Icon(Iconsax.people, color: Colors.white.withOpacity(0.5)),
             label: 'Workspace',
-            selectedIcon: const Icon(Iconsax.people, color: Colors.blue),
+            selectedIcon: const Icon(Iconsax.people, color: kPrimaryBlue),
           ),
           NavigationDestination(
             icon: Icon(
               FontAwesomeIcons.trello,
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.white.withOpacity(0.5),
             ),
             selectedIcon: const Icon(
               FontAwesomeIcons.trello,
-              color: Colors.blue,
+              color: kPrimaryBlue,
             ),
             label: 'Boards',
           ),
@@ -92,22 +94,22 @@ class _HomeScreenState extends State<HomeScreen> {
           NavigationDestination(
             icon: Icon(
               FontAwesomeIcons.creditCard,
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.white.withOpacity(0.5),
             ),
             selectedIcon: const Icon(
               FontAwesomeIcons.creditCard,
-              color: Colors.blue,
+              color: kPrimaryBlue,
             ),
             label: 'Cards',
           ),
           NavigationDestination(
             icon: Icon(
               Iconsax.profile_circle,
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.white.withOpacity(0.5),
             ),
             selectedIcon: const Icon(
               Iconsax.profile_circle5,
-              color: Colors.blue,
+              color: kPrimaryBlue,
             ),
             label: 'Profile',
           ),

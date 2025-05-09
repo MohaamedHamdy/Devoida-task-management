@@ -6,12 +6,12 @@ class Styles {
   static TextStyle titleStyle = TextStyle(
     fontSize: 18.sp,
     fontWeight: FontsHelper.semiBold,
-    color: Colors.black,
+    // color: Colors.black,
   );
 
   static TextStyle cardTitleStyle = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontsHelper.medium,
-    color: Colors.black,
+    // color: Colors.black,
   );
 }

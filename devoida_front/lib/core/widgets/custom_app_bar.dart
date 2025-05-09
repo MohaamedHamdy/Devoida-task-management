@@ -1,27 +1,38 @@
 import 'package:devoida_front/core/utils/theming/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../utils/helpers/spacing.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
-    required this.leading,
+    required this.leadingImage,
     required this.title,
-    required this.actions,
+    this.actions,
+    this.titleStyle,
   });
-  final Widget leading;
+  final String leadingImage;
   final String title;
-  final List<Widget> actions;
+  final List<Widget>? actions;
+  final TextStyle? titleStyle;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0.0),
-      child: Row(
-        children: [
-          leading,
-          SizedBox(width: 10),
-          Text(title, style: Styles.titleStyle),
-          Row(children: actions),
-        ],
+    return Container(
+      height: 96.h,
+      width: double.infinity,
+      color: const Color(0xFF212121),
+      child: Padding(
+        padding: EdgeInsets.only(top: 30.0.h, left: 14.0.w, right: 14.0.w),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Image.asset(leadingImage),
+            widthSizedBox(6),
+            Text(title, style: titleStyle ?? Styles.titleStyle),
+            Row(children: actions ?? [],),
+          ],
+        ),
       ),
     );
   }
