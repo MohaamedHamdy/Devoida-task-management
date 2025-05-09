@@ -1,7 +1,14 @@
 from fastapi import FastAPI
+from app.database import engine, Base
+from app.models import users  # Import user model
 
 app = FastAPI()
 
+@app.on_event("startup")
+async def on_startup():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to Task Manager"}
+async def root():
+    return {"message": "Task Management API is up!"}
