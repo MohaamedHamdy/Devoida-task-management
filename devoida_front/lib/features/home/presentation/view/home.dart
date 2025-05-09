@@ -1,10 +1,12 @@
 import 'package:devoida_front/core/utils/theming/colors.dart';
 import 'package:devoida_front/core/widgets/custom_app_bar.dart';
-import 'package:devoida_front/features/home/presentation/view/widgets/home_screen.dart';
+import 'package:devoida_front/features/board/presentation/view/board_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../workspace/presentation/view/workspace_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final int initialIndex;
@@ -27,8 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List screens = [
-    const HomeScreenBody(),
-    Container(),
+    const WorkspaceScreen(),
+    const BoardScreen(),
     Container(),
     Container(),
     Container(),
