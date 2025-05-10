@@ -5,7 +5,7 @@ from ..repository import workspace
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
 from ..oauth2 import get_current_user
-
+from typing import List
 
 router = APIRouter(
     prefix="/workspace",
@@ -33,3 +33,7 @@ async def add_member_to_workspace(
     current_user: dict = Depends(get_current_user)
 ):
     return await workspace.add_member_to_workspace(request.workspace_id, request.user_id, db, current_user)
+
+@router.get('/{workspace_id}/members', response_model=List[schemas.UserOut])
+async def get_members(workspace_id: int, db: AsyncSession = Depends(database.get_db)):
+    return await workspace.get_all_members_of_workspace(workspace_id, db)

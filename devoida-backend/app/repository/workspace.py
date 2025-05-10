@@ -23,7 +23,7 @@ async def create_workspace(request: WorkSpace, db: AsyncSession, current_user: d
     )
 
     db.add(creator_membership)
-    
+
     await db.commit()
     await db.refresh(new_workspace)
     return new_workspace
@@ -64,3 +64,12 @@ async def add_member_to_workspace(
     return {"detail": "User added to workspace"}
     
     
+async def get_all_members_of_workspace(workspace_id : int, db: AsyncSession):
+    stmt = (
+        select(models.User)
+        .join(models.WorkspaceMembership)
+        .where(models.WorkspaceMembership.workspace_id == workspace_id)
+    )
+    result = await db.execute(stmt)
+    members = result.scalars().all()
+    return members
