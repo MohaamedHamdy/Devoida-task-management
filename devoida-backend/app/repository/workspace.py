@@ -4,6 +4,7 @@ from sqlalchemy import select
 from .. import database
 from fastapi import Depends, HTTPException
 from ..oauth2 import get_current_user
+from sqlalchemy.orm import joinedload
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -73,3 +74,15 @@ async def get_all_members_of_workspace(workspace_id : int, db: AsyncSession):
     result = await db.execute(stmt)
     members = result.scalars().all()
     return members
+
+async def get_all_workspaces_for_user(user_id : int, db: AsyncSession):
+    stmt = (
+        select(models.Workspace)
+        .join(models.WorkspaceMembership)
+        .where(models.WorkspaceMembership.user_id == user_id)
+        .options(joinedload(models.Workspace.creator))  # Load creator relationship
+        .where(models.WorkspaceMembership.user_id == user_id)
+    )
+    result = await db.execute(stmt)
+    workSpaces = result.scalars().all()
+    return workSpaces

@@ -50,3 +50,12 @@ class AddToWorkspace(BaseModel):
     user_id : int
     class Config:
         orm_mode = True
+
+class WorkSpaceOut(BaseModel):
+    id: int
+    name: str
+    description: str
+    created_by: Optional[UserOut]
+
+    class Config:
+        orm_mode = True

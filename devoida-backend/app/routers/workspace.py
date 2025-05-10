@@ -37,3 +37,7 @@ async def add_member_to_workspace(
 @router.get('/{workspace_id}/members', response_model=List[schemas.UserOut])
 async def get_members(workspace_id: int, db: AsyncSession = Depends(database.get_db)):
     return await workspace.get_all_members_of_workspace(workspace_id, db)
+
+@router.get('/{user_id}/workspaces', response_model=List[schemas.WorkSpaceOut])
+async def get_workspaces_for_user(user_id: int, db: AsyncSession = Depends(database.get_db)):
+    return await workspace.get_all_workspaces_for_user(user_id, db)
