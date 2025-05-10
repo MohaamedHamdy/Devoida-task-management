@@ -68,7 +68,7 @@ class Onboarding extends StatelessWidget {
                 child: Text("Sign Up", style: Styles.cardTitleStyle),
               ),
 
-              const Spacer(),
+              // const Spacer(),
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(

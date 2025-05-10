@@ -1,5 +1,4 @@
 import 'package:devoida_front/features/authentication/signin/presentation/view/widgets/signin_screen_body.dart';
-import 'package:devoida_front/features/authentication/signup/presentation/view/widgets/signup_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatelessWidget {

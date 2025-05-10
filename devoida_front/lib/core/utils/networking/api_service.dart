@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ApiService {
-  final baseUrl = 'http://192.168.1.2:8000/';
+  // final baseUrl = 'http://192.168.1.2:8000';
+  final baseUrl = 'http://10.0.2.2:8000/';
 
   Dio dio;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
@@ -40,16 +41,25 @@ class ApiService {
     required String endPoints,
     required Map<String, dynamic> data,
   }) async {
+    // print(endPoints);
+    // print('$baseUrl$endPoints');
     try {
       var response = await dio.post(
-        '$baseUrl$endPoints',
+        'http://10.0.2.2:8000/$endPoints',
         data: data,
         options: Options(method: 'POST', headers: headers),
       );
+      // print(response.data);
       return response;
     } catch (error) {
-      debugPrint(' $error');
-      rethrow; // Re-throw the error for handling in the caller
+      if (error is DioException) {
+        // print("Dio error type: ${error.type}");
+        // print("Dio error message: ${error.message}");
+        // print("Dio request: ${error.requestOptions.uri}");
+      } else {
+        // print("Non-Dio error: $error");
+      }
+      rethrow;
     }
   }
 
