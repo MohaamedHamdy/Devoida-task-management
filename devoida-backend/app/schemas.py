@@ -1,6 +1,7 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime, date
 from typing import Optional
+from app.models import models
 
 class User(BaseModel):
     username: str
@@ -56,6 +57,61 @@ class WorkSpaceOut(BaseModel):
     name: str
     description: str
     created_by: Optional[int]
+
+    class Config:
+        orm_mode = True
+
+
+class BoardCreate(BaseModel):
+    name: str
+    description: str
+    workspace_id: int
+
+
+class BoardUpdate(BaseModel):
+    name: str
+
+
+class BoardOut(BaseModel):
+    id: int
+    name: str
+    workspace_id: int
+    created_by: int
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
+
+
+class TaskBase(BaseModel):
+    title: str
+    description: Optional[str]
+    board_id: int
+    due_date: Optional[date]
+    status: Optional[models.StatusEnum] = models.StatusEnum.todo
+
+
+class TaskCreate(TaskBase):
+    pass
+
+
+class TaskUpdate(BaseModel):
+    title: Optional[str]
+    description: Optional[str]
+    due_date: Optional[date]
+    status: Optional[models.StatusEnum]
+
+
+class TaskOut(BaseModel):
+    id: int
+    title: str
+    description: Optional[str]
+    status: models.StatusEnum
+    due_date: Optional[date]
+    board_id: int
+    created_by: int
+    assigned_to: Optional[int] 
+    created_at: datetime
 
     class Config:
         orm_mode = True
