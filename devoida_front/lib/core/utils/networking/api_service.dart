@@ -40,14 +40,15 @@ class ApiService {
   Future<Response> post({
     required String endPoints,
     required Map<String, dynamic> data,
+    Options? options,
   }) async {
     // print(endPoints);
-    // print('$baseUrl$endPoints');
+    print('$baseUrl$endPoints');
     try {
       var response = await dio.post(
         'http://10.0.2.2:8000/$endPoints',
         data: data,
-        options: Options(method: 'POST', headers: headers),
+        options: options ?? Options(method: 'POST', headers: headers),
       );
       // print(response.data);
       return response;

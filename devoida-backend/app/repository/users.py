@@ -21,13 +21,13 @@ async def create_user(request: schemas.User, db: Session = Depends(database.get_
     
     if existing_user.scalar():
         raise HTTPException(status_code=400, detail="Email or Username already exists")
-    
     new_user = models.User(
         username=request.username,
         password_hash=Hash.bcrypt(request.password_hash),
         email=request.email,
         profile_picture=request.profile_picture,
     )
+
 
     try:
         db.add(new_user)

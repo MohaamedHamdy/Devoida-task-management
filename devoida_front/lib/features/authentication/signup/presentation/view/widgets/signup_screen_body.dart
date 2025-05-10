@@ -144,8 +144,8 @@ class _SignupScreenBodyState extends State<SignupScreenBody> {
                           debugPrint("Password: ${_passwordController.text}");
                           cubit.signUp(
                             username: _usernameController.text,
-                            pass: _emailController.text,
-                            email: _passwordController.text,
+                            pass: _passwordController.text,
+                            email: _emailController.text,
                           );
                         }
                       },
@@ -168,6 +168,7 @@ class _SignupScreenBodyState extends State<SignupScreenBody> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("User created successfully")),
                       );
+                      GoRouter.of(context).push(Routes.kSigninScreen);
                     }
                   },
                 ),

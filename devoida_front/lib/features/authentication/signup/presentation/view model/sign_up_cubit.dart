@@ -12,6 +12,9 @@ class SignUpCubit extends Cubit<SignUpState> {
     required String pass,
     required String email,
   }) async {
+    print(username);
+    print("pass: " + pass);
+    print(email);
     emit(SignUpLoading());
     await Future.delayed(const Duration(seconds: 1));
     var result = await signUpRepo.signUp(
