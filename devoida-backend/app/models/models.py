@@ -26,7 +26,7 @@ class User(Base):
 
     created_workspaces = relationship("Workspace", back_populates="creator")
     memberships = relationship("WorkspaceMembership", back_populates="user")
-    # created_boards = relationship("Board", back_populates="creator")
+    created_boards = relationship("Board", back_populates="creator")
     # created_tasks = relationship("Task", back_populates="creator")
     # assigned_tasks = relationship("TaskAssignment", back_populates="user")
     # created_tasks = relationship("Task", back_populates="creator", foreign_keys="[Task.created_by]")
@@ -47,7 +47,7 @@ class Workspace(Base):
 
     creator = relationship("User", back_populates="created_workspaces")
     members = relationship("WorkspaceMembership", back_populates="workspace")
-    # boards = relationship("Board", back_populates="workspace")
+    boards = relationship("Board", back_populates="workspace")
 
 class WorkspaceMembership(Base):
     __tablename__ = "workspace_memberships"
@@ -63,17 +63,17 @@ class WorkspaceMembership(Base):
     workspace = relationship("Workspace", back_populates="members")
 
 
-# class Board(Base):
-#     __tablename__ = "boards"
+class Board(Base):
+    __tablename__ = "boards"
 
-#     id = Column(Integer, primary_key=True, index=True)
-#     workspace_id = Column(Integer, ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False)
-#     name = Column(String(100), nullable=False)
-#     created_by = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
-#     created_at = Column(TIMESTAMP, server_default=func.now())
+    id = Column(Integer, primary_key=True, index=True)
+    workspace_id = Column(Integer, ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False)
+    name = Column(String(100), nullable=False)
+    created_by = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"))
+    created_at = Column(TIMESTAMP, server_default=func.now())
 
-#     workspace = relationship("Workspace", back_populates="boards")
-#     creator = relationship("User", back_populates="created_boards")
+    workspace = relationship("Workspace", back_populates="boards")
+    creator = relationship("User", back_populates="created_boards")
 #     tasks = relationship("Task", back_populates="board")
 
 
