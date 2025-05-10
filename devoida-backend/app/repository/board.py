@@ -48,7 +48,7 @@ async def get_boards(workspace_id: int, created_by_me: bool, db: AsyncSession, c
     stmt = stmt.order_by(models.Board.created_at.desc())
 
     result = await db.execute(stmt)
-    return result.scalars().all()
+    return {"Status" : "Success" , "data" : result.scalars().all()}
 
 
 async def delete_board(board_id: int, db: AsyncSession, current_user: dict):

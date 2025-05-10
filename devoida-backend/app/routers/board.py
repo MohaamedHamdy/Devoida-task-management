@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from typing import List
 from sqlalchemy.ext.asyncio import AsyncSession
 from .. import database
-from ..schemas import BoardCreate, BoardUpdate, BoardOut
+from ..schemas import BoardCreate, BoardUpdate, BoardOut, BoardListResponse
 from ..oauth2 import get_current_user
 from ..repository import board
 
@@ -19,7 +19,7 @@ async def create_board(
     return await board.create_board(request, db, current_user)
 
 
-@router.get("/{workspace_id}", response_model=List[BoardOut])
+@router.get("/{workspace_id}", response_model=BoardListResponse)
 async def get_boards(
     workspace_id: int,
     created_by_me: bool = False,

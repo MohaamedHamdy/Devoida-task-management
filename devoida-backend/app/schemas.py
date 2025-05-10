@@ -86,6 +86,10 @@ class BoardOut(BaseModel):
         orm_mode = True
 
 
+class BoardListResponse(BaseModel):
+    Status: str
+    data: List[BoardOut]
+
 class TaskBase(BaseModel):
     title: str
     description: Optional[str]

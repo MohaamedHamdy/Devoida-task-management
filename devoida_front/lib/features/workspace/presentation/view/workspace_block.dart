@@ -1,5 +1,7 @@
+import 'package:devoida_front/core/utils/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../core/utils/helpers/spacing.dart';
@@ -23,7 +25,9 @@ class WorkSpaceBlock extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 14.0.w, right: 14.0.w),
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              GoRouter.of(context).push(Routes.kBoardsScreen, extra: id);
+            },
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 10.0.h),
               child: Row(

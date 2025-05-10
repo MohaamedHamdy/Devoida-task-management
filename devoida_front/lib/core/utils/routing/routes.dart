@@ -3,4 +3,5 @@ class Routes {
   static const String kSignupScreen = '/signup';
   static const String kSigninScreen = '/signin';
   static const String kHomeScreen = '/home';
+  static const String kBoardsScreen = '/allboards';
 }

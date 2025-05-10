@@ -7,11 +7,12 @@ import '../../../../core/utils/theming/styles.dart';
 class BoardBlock extends StatelessWidget {
   final bool showTopBorder;
   final bool isFullBottomBorder;
-
+  final String name;
   const BoardBlock({
     super.key,
     this.showTopBorder = false,
     this.isFullBottomBorder = false,
+    required this.name,
   });
 
   @override
@@ -43,7 +44,7 @@ class BoardBlock extends StatelessWidget {
                   ),
                 ),
                 widthSizedBox(10),
-                Text("Pet-Yard", style: Styles.subTitleStyle),
+                Text(name, style: Styles.subTitleStyle),
               ],
             ),
           ),

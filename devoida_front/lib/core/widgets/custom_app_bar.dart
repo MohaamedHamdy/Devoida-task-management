@@ -1,6 +1,7 @@
 import 'package:devoida_front/core/utils/theming/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../utils/helpers/spacing.dart';
 
@@ -11,11 +12,13 @@ class CustomAppBar extends StatelessWidget {
     required this.title,
     this.actions,
     this.titleStyle,
+    this.backOption = false,
   });
   final String leadingImage;
   final String title;
   final List<Widget>? actions;
   final TextStyle? titleStyle;
+  final bool? backOption;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +30,14 @@ class CustomAppBar extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
+            backOption!
+                ? IconButton(
+                  onPressed: () {
+                    GoRouter.of(context).pop();
+                  },
+                  icon: Icon(Icons.arrow_back_ios),
+                )
+                : SizedBox(),
             Image.asset(leadingImage),
             widthSizedBox(8),
             Text(title, style: titleStyle ?? Styles.titleStyle),
