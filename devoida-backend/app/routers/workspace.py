@@ -38,6 +38,21 @@ async def add_member_to_workspace(
 async def get_members(workspace_id: int, db: AsyncSession = Depends(database.get_db)):
     return await workspace.get_all_members_of_workspace(workspace_id, db)
 
-@router.get('/{user_id}/workspaces', response_model=List[schemas.WorkSpaceOut])
-async def get_workspaces_for_user(user_id: int, db: AsyncSession = Depends(database.get_db)):
-    return await workspace.get_all_workspaces_for_user(user_id, db)
+@router.get('/workspaces', response_model=List[schemas.WorkSpaceOut])
+async def get_workspaces_for_user(
+    db: AsyncSession = Depends(database.get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    return await workspace.get_all_workspaces_for_user(db, current_user)
+
+
+@router.delete('/workspaces/{workspace_id}/delete/{user_id}', status_code=200)
+async def delete_user_from_workspace(
+    workspace_id: int,
+    user_id: int,
+    db: AsyncSession = Depends(database.get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    return await workspace.delete_user_from_workspace(
+        workspace_id, user_id, db, current_user
+    )

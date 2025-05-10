@@ -1,6 +1,6 @@
 from ..schemas import WorkSpace
 from ..models import models
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from .. import database
 from fastapi import Depends, HTTPException
 from ..oauth2 import get_current_user
@@ -48,6 +48,12 @@ async def add_member_to_workspace(
 
     if workspace.created_by != current_user["user_id"]:
         raise HTTPException(status_code=403, detail="Only creator can add members")
+    
+    user = await db.execute(select(models.User).where(models.User.id == user_id))
+
+    if user.scalar_one_or_none() is None:
+        raise HTTPException(status_code=404, detail="User not found")
+
     check_stmt = select(models.WorkspaceMembership).where(
         models.WorkspaceMembership.user_id == user_id,
         models.WorkspaceMembership.workspace_id == workspace_id
@@ -75,14 +81,57 @@ async def get_all_members_of_workspace(workspace_id : int, db: AsyncSession):
     members = result.scalars().all()
     return members
 
-async def get_all_workspaces_for_user(user_id : int, db: AsyncSession):
+async def get_all_workspaces_for_user(db: AsyncSession, current_user: dict):
     stmt = (
         select(models.Workspace)
         .join(models.WorkspaceMembership)
-        .where(models.WorkspaceMembership.user_id == user_id)
-        .options(joinedload(models.Workspace.creator))  # Load creator relationship
-        .where(models.WorkspaceMembership.user_id == user_id)
+        .where(models.WorkspaceMembership.user_id == current_user["user_id"])
+        .options(joinedload(models.Workspace.creator))
     )
     result = await db.execute(stmt)
-    workSpaces = result.scalars().all()
-    return workSpaces
+    workspaces = result.scalars().all()
+    return workspaces
+
+
+async def delete_user_from_workspace(workspace_id : int, 
+                                     user_id : int, 
+                                     db: AsyncSession, 
+                                     current_user: dict):
+    result = await db.execute(
+        select(models.Workspace).where(models.Workspace.id == workspace_id)
+    )
+    workspace = result.scalar_one_or_none()
+
+    if not workspace:
+        raise HTTPException(status_code=404, detail="Workspace not found")
+
+    if workspace.created_by != current_user["user_id"]:
+        raise HTTPException(status_code=403, detail="You are not the creator of this workspace")
+
+    if user_id == current_user["user_id"]:
+        raise HTTPException(status_code=400, detail="You cannot remove yourself from your own workspace")
+    
+    user = await db.execute(select(models.User).where(models.User.id == user_id))
+    
+    if user.scalar_one_or_none() is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+
+    membership = await db.execute(
+    select(models.WorkspaceMembership).where(
+        models.WorkspaceMembership.user_id == user_id,
+        models.WorkspaceMembership.workspace_id == workspace_id
+        )
+    )
+    if membership.scalar_one_or_none() is None:
+        raise HTTPException(status_code=404, detail="User is not a member of this workspace")
+
+
+    await db.execute(
+        delete(models.WorkspaceMembership).where(
+            models.WorkspaceMembership.user_id == user_id,
+            models.WorkspaceMembership.workspace_id == workspace_id
+        )
+    )
+    await db.commit()
+    return {"detail": "User removed from workspace successfully"}

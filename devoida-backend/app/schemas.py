@@ -55,7 +55,7 @@ class WorkSpaceOut(BaseModel):
     id: int
     name: str
     description: str
-    created_by: Optional[UserOut]
+    created_by: Optional[int]
 
     class Config:
         orm_mode = True
