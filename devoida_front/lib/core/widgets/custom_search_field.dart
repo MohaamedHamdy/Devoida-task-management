@@ -4,10 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 InputBorder customEnabledOutlinedBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(10.0.r),
-  borderSide: BorderSide(
-    color: Colors.white.withOpacity(0.2),
-    width: 2.0,
-  ),
+  borderSide: BorderSide(color: Colors.white.withOpacity(0.2), width: 2.0),
 );
 
 InputBorder customFocusedOutlinedBorder = OutlineInputBorder(
@@ -20,10 +17,7 @@ InputBorder customFocusedOutlinedBorder = OutlineInputBorder(
 );
 InputBorder customErrorOutlinedBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(10.0.r),
-  borderSide: const BorderSide(
-    color: Colors.red,
-    width: 2.0,
-  ),
+  borderSide: const BorderSide(color: Colors.red, width: 2.0),
 );
 
 class CustomTextField extends StatelessWidget {

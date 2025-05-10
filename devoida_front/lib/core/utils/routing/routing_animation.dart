@@ -9,8 +9,8 @@ CustomTransitionPage transitionGoRoute<T>({
   return CustomTransitionPage<T>(
     key: state.pageKey,
     child: child,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-        FadeTransition(
+    transitionsBuilder:
+        (context, animation, secondaryAnimation, child) => FadeTransition(
           opacity: CurveTween(curve: Curves.ease).animate(animation),
           child: child,
         ),

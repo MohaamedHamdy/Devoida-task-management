@@ -135,9 +135,7 @@ class _BoardTasksState extends State<BoardTasks> {
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Card(
         elevation: 3,
-        child: Center(
-          child: Text(task.title, style: Styles.cardTitleStyle,),
-        ),
+        child: Center(child: Text(task.title, style: Styles.cardTitleStyle)),
       ),
     );
   }

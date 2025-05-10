@@ -30,8 +30,23 @@ async def create_workspace(request: WorkSpace, db: AsyncSession, current_user: d
     return new_workspace
 
 async def get_created_workspaces(db: AsyncSession, current_user: dict):
+    # print(current_user["user_id"])
+    # print(current_user)
     result = await db.execute(select(models.Workspace).filter(models.Workspace.created_by == current_user["user_id"]))
-    return result.scalars().all()
+
+    return {"Status" : "Success", "data": result.scalars().all()}
+
+
+async def get_all_workspaces_for_user(db: AsyncSession, current_user: dict):
+    stmt = (
+        select(models.Workspace)
+        .join(models.WorkspaceMembership)
+        .where(models.WorkspaceMembership.user_id == current_user["user_id"])
+        .options(joinedload(models.Workspace.creator))
+    )
+    result = await db.execute(stmt)
+    workspaces = result.scalars().all()
+    return {"Status" : "Success", "data" : workspaces}
 
 async def add_member_to_workspace(
     workspace_id: int,
@@ -81,16 +96,6 @@ async def get_all_members_of_workspace(workspace_id : int, db: AsyncSession):
     members = result.scalars().all()
     return members
 
-async def get_all_workspaces_for_user(db: AsyncSession, current_user: dict):
-    stmt = (
-        select(models.Workspace)
-        .join(models.WorkspaceMembership)
-        .where(models.WorkspaceMembership.user_id == current_user["user_id"])
-        .options(joinedload(models.Workspace.creator))
-    )
-    result = await db.execute(stmt)
-    workspaces = result.scalars().all()
-    return workspaces
 
 
 async def delete_user_from_workspace(workspace_id : int, 

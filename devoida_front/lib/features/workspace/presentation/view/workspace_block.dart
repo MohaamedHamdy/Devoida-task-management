@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
@@ -8,8 +7,15 @@ import '../../../../core/utils/theming/colors.dart';
 import '../../../../core/utils/theming/styles.dart';
 
 class WorkSpaceBlock extends StatelessWidget {
-  const WorkSpaceBlock({super.key});
-
+  const WorkSpaceBlock({
+    super.key,
+    required this.id,
+    required this.name,
+    required this.description,
+  });
+  final int id;
+  final String name;
+  final String description;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,13 +30,11 @@ class WorkSpaceBlock extends StatelessWidget {
                 children: [
                   Icon(Iconsax.people, color: kTextWhite),
                   widthSizedBox(10),
-                  Text("Devoida Workspace", style: Styles.subTitleStyle),
+                  Text(name, style: Styles.subTitleStyle),
                   Spacer(),
                   Text(
                     "Boards",
-                    style: Styles.subTitleStyle.copyWith(
-                      color: kPrimaryBlue,
-                    ),
+                    style: Styles.subTitleStyle.copyWith(color: kPrimaryBlue),
                   ),
                   widthSizedBox(10),
                   Icon(
@@ -48,4 +52,3 @@ class WorkSpaceBlock extends StatelessWidget {
     );
   }
 }
-

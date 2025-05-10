@@ -1,5 +1,4 @@
 import 'package:devoida_front/features/board/presentation/view/board_block.dart';
-import 'package:devoida_front/features/workspace/presentation/view/workspace_block.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -63,11 +62,11 @@ class WorkspaceBoardsBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        WorkSpaceBlock(),
-        BoardBlock(showTopBorder: true,),
+        // WorkSpaceBlock(),
+        BoardBlock(showTopBorder: true),
         BoardBlock(),
         BoardBlock(),
-        BoardBlock(isFullBottomBorder: true,)
+        BoardBlock(isFullBottomBorder: true),
       ],
     );
   }

@@ -22,15 +22,17 @@ class SignInRepo {
         options: Options(contentType: Headers.formUrlEncodedContentType),
       );
       // Check if response is successful
-      print("hennaa");
-      print(response);
-      print(response.data);
+      // print("hennaa");
+      // print(response);
+      // print(response.data);
       if (response.data['status'] == 'Success') {
-        final token = response.data['token'];
+        // print("object");
+        final token = response.data['access_token'];
         await _storage.write(key: 'token', value: token);
         debugPrint(
           "=============================== ${response.data['status']}",
         );
+        // debugPrint("=============================== ${token}");
         return right(response.data['status'].toString());
       } else {
         // Handle error response

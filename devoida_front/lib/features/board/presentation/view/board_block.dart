@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/helpers/spacing.dart';
 import '../../../../core/utils/theming/styles.dart';
+
 class BoardBlock extends StatelessWidget {
   final bool showTopBorder;
   final bool isFullBottomBorder;
@@ -22,11 +23,12 @@ class BoardBlock extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.1),
-            border: showTopBorder
-                ? Border(
-              top: BorderSide(color: Colors.white.withOpacity(0.3)),
-            )
-                : null,
+            border:
+                showTopBorder
+                    ? Border(
+                      top: BorderSide(color: Colors.white.withOpacity(0.3)),
+                    )
+                    : null,
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.0.w),
@@ -49,17 +51,11 @@ class BoardBlock extends StatelessWidget {
         if (!isFullBottomBorder)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.0.w),
-            child: Container(
-              height: 1,
-              color: Colors.white.withOpacity(0.3),
-            ),
+            child: Container(height: 1, color: Colors.white.withOpacity(0.3)),
           ),
         if (isFullBottomBorder)
-        // Full-width border
-          Container(
-            height: 1,
-            color: Colors.white.withOpacity(0.3),
-          ),
+          // Full-width border
+          Container(height: 1, color: Colors.white.withOpacity(0.3)),
       ],
     );
   }

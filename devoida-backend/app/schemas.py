@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime, date
-from typing import Optional
+from typing import Optional, List
 from app.models import models
 
 class User(BaseModel):
@@ -61,6 +61,9 @@ class WorkSpaceOut(BaseModel):
     class Config:
         orm_mode = True
 
+class WorkSpaceListResponse(BaseModel):
+    Status: str
+    data: List[WorkSpaceOut]
 
 class BoardCreate(BaseModel):
     name: str
