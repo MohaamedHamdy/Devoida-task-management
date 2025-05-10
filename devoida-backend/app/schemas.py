@@ -44,3 +44,9 @@ class WorkSpace(BaseModel):
     class Config:
         orm_mode = True
     # created_by: int
+
+class AddToWorkspace(BaseModel):
+    workspace_id : int
+    user_id : int
+    class Config:
+        orm_mode = True

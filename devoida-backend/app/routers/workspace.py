@@ -25,3 +25,11 @@ async def get_created_workspaces(
       db:Session = Depends(database.get_db), 
       current_user: dict = Depends(get_current_user)):
     return await workspace.get_created_workspaces( db, current_user)
+
+@router.post("/add-member")
+async def add_member_to_workspace(
+    request: schemas.AddToWorkspace,
+    db: AsyncSession = Depends(database.get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    return await workspace.add_member_to_workspace(request.workspace_id, request.user_id, db, current_user)
