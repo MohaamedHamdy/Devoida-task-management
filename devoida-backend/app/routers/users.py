@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, Query
 from .. import schemas, database, oauth2
 from typing import List
 from app.models import models
@@ -20,3 +20,12 @@ async def create_user(request: schemas.User, db:Session = Depends(database.get_d
 @router.get('/', response_model=List[schemas.UserOut])
 async def get_all(db: AsyncSession = Depends(database.get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return await users.get_all(db)
+
+
+@router.get("/search")
+async def search_users(
+    query: str = Query(..., min_length=1),
+    db: AsyncSession = Depends(database.get_db),
+    current_user: schemas.User = Depends(oauth2.get_current_user)
+):
+     return await users.search_users(query, db)

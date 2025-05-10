@@ -37,3 +37,10 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Optional[str] = None
+
+class WorkSpace(BaseModel):
+    name: str
+    description: str
+    class Config:
+        orm_mode = True
+    # created_by: int

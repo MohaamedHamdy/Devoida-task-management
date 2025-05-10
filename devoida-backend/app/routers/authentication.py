@@ -25,5 +25,5 @@ async def login(request:OAuth2PasswordRequestForm = Depends(), db: AsyncSession 
         raise HTTPException(status_code=401, detail="Incorrect password")
 
 
-    access_token = token.create_access_token(data={"sub": user.email})
+    access_token = token.create_access_token(data={"sub": user.email, "user_id": user.id})
     return {"access_token": access_token, "token_type": "bearer"}

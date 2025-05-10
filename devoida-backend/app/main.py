@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.database import engine, Base
-from .routers import users, authentication
+from .routers import users, authentication, workspace
 
 app = FastAPI()
 
@@ -15,3 +15,4 @@ async def root():
 
 app.include_router(authentication.router)
 app.include_router(users.router)
+app.include_router(workspace.router)
