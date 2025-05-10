@@ -1,10 +1,10 @@
-**Setup Instructions:**
+**Setup Instructions:**  
 Prerequisites
 Flutter SDK
 MySQL
 Python with FastAPI and Uvicorn
 
-Steps
+Steps  
 1- Clone the repo
 2- flutter pub get
 3- flutter run
@@ -12,9 +12,9 @@ Set up Python virtual environment:
 1- python -m venv venv
 2- source venv/bin/activate 
 3- pip install -r requirements.txt
-4- uvicorn app.main:app --reload
-
-
+4- uvicorn app.main:app --reload  
+ 
+**API DOC**: http://127.0.0.1:8000/docs
 
 
 **Decision-Making Reports**
@@ -120,3 +120,6 @@ Local Storage: Use SQLite (for mobile apps) or IndexedDB (for web) to store app 
 Offline-first Approach: Ensure the app can function without an internet connection by designing it to prioritize local storage for data and sync when connectivity is available.
 
 This approach ensures the app is usable even in the absence of internet access and automatically syncs when possible.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
