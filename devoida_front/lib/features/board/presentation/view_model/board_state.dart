@@ -1,4 +1,5 @@
 import 'package:devoida_front/features/board/data/models/board.dart';
+import 'package:devoida_front/features/workspace/data/models/members.dart';
 
 abstract class BoardState {}
 
@@ -22,4 +23,10 @@ class CreatedBoardSuccess extends BoardState {
   final String message;
 
   CreatedBoardSuccess(this.message);
+}
+
+class BoardMembersSuccess extends BoardState {
+  final List<Members> members;
+
+  BoardMembersSuccess(this.members);
 }

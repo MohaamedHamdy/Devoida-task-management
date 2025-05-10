@@ -94,8 +94,7 @@ async def get_all_members_of_workspace(workspace_id : int, db: AsyncSession):
     )
     result = await db.execute(stmt)
     members = result.scalars().all()
-    return members
-
+    return {"Status" : "Success", "data" : members}
 
 
 async def delete_user_from_workspace(workspace_id : int, 

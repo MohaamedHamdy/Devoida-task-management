@@ -1,26 +1,13 @@
-import 'package:devoida_front/core/utils/helpers/spacing.dart';
-import 'package:devoida_front/core/utils/theming/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../core/utils/theming/styles.dart';
-import '../../../home/presentation/view/model.dart';
+import 'model.dart';
 
-class BoardTasks extends StatefulWidget {
-  const BoardTasks({
-    super.key,
-    required this.name,
-    required this.workspaceName,
-  });
-  final String name;
-  final String workspaceName;
+class KanbanBoardSimple extends StatefulWidget {
   @override
-  State<BoardTasks> createState() => _BoardTasksState();
+  _KanbanBoardSimpleState createState() => _KanbanBoardSimpleState();
 }
 
-class _BoardTasksState extends State<BoardTasks> {
+class _KanbanBoardSimpleState extends State<KanbanBoardSimple> {
   List<KanbanColumn> columns = [
     KanbanColumn(
       id: 'todo',
@@ -47,26 +34,7 @@ class _BoardTasksState extends State<BoardTasks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink,
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            GoRouter.of(context).pop();
-          },
-          icon: Icon(FontAwesomeIcons.xmark),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.name,
-              style: Styles.titleStyle.copyWith(color: Colors.white),
-            ),
-            Text(widget.workspaceName, style: Styles.subTitleStyle),
-          ],
-        ),
-        backgroundColor: Colors.black.withOpacity(0.3),
-      ),
+      appBar: AppBar(title: const Text("Kanban Board")),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -77,12 +45,12 @@ class _BoardTasksState extends State<BoardTasks> {
                   children: [
                     Text(
                       column.title,
-                      style: TextStyle(
-                        fontSize: 20.sp,
+                      style: const TextStyle(
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    heightSizedBox(8),
+                    const SizedBox(height: 8),
                     DragTarget<Task>(
                       onWillAccept: (_) => true,
                       onAccept: (task) {
@@ -95,7 +63,7 @@ class _BoardTasksState extends State<BoardTasks> {
                       },
                       builder: (context, candidateData, rejectedData) {
                         return SizedBox(
-                          height: 120.h,
+                          height: 100,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: column.tasks.length,
@@ -105,9 +73,9 @@ class _BoardTasksState extends State<BoardTasks> {
                                 data: task,
                                 feedback: Material(
                                   child: Card(
-                                    color: kPrimaryBlue,
+                                    color: Colors.blueAccent,
                                     child: Padding(
-                                      padding: EdgeInsets.all(20.0.h),
+                                      padding: const EdgeInsets.all(12.0),
                                       child: Text(
                                         task.title,
                                         style: const TextStyle(
@@ -139,11 +107,14 @@ class _BoardTasksState extends State<BoardTasks> {
 
   Widget _buildTaskCard(Task task) {
     return Container(
-      width: 180.w,
+      width: 120,
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Card(
         elevation: 3,
-        child: Center(child: Text(task.title, style: Styles.cardTitleStyle)),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(task.title),
+        ),
       ),
     );
   }

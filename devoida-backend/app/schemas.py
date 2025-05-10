@@ -24,6 +24,10 @@ class UserOut(BaseModel):
     class Config:
         orm_mode = True
 
+class UsersListResponse(BaseModel):
+    Status: str
+    data: List[UserOut]
+
 class Login(BaseModel):
     username : str
     password : str

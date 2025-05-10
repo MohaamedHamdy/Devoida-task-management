@@ -32,4 +32,12 @@ class BoardCubit extends Cubit<BoardState> {
       (boards) => emit(BoardSuccess(boards)),
     );
   }
+
+  Future<void> getMembers(int workspaceId) async {
+    final result = await boardRepo.getMembers(workspaceId);
+    result.fold(
+      (failure) => emit(BoardFailure(failure.errorMessage)),
+      (members) => emit(BoardMembersSuccess(members)),
+    );
+  }
 }

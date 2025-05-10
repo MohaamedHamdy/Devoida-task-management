@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:devoida_front/core/errors/failure.dart';
 import 'package:devoida_front/core/utils/networking/api_service.dart';
+import 'package:devoida_front/features/workspace/data/models/members.dart';
 import 'package:devoida_front/features/workspace/data/models/worspace.dart';
 import 'package:dio/dio.dart';
 

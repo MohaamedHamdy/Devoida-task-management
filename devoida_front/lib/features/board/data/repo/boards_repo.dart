@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:devoida_front/core/errors/failure.dart';
 import 'package:devoida_front/core/utils/networking/api_service.dart';
 import 'package:devoida_front/features/board/data/models/board.dart';
+import 'package:devoida_front/features/workspace/data/models/members.dart';
 import 'package:devoida_front/features/workspace/data/models/worspace.dart';
 import 'package:dio/dio.dart';
 
@@ -50,6 +51,29 @@ class BoardRepo {
         List<Board> boards = data.map((e) => Board.fromJson(e)).toList();
         return right(boards);
       } else {
+        return left(ServerFailure(response['message']));
+      }
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, List<Members>>> getMembers(int workspaceId) async {
+    try {
+      await api.setAuthorizationHeader();
+      var response = await api.get(endpoint: "workspace/$workspaceId/members");
+      // print(response);
+      // Check if response is successful
+      if (response['Status'] == 'Success') {
+        List data = response['data'];
+        List<Members> members = data.map((e) => Members.fromJson(e)).toList();
+        return right(members);
+      } else {
+        // Handle error response
+
         return left(ServerFailure(response['message']));
       }
     } catch (e) {

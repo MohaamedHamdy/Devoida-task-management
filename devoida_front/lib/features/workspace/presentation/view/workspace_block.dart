@@ -26,8 +26,14 @@ class WorkSpaceBlock extends StatelessWidget {
           padding: EdgeInsets.only(left: 14.0.w, right: 14.0.w),
           child: InkWell(
             onTap: () {
-              GoRouter.of(context).push(Routes.kBoardsScreen, extra: id);
+              // print(id);
+              // print(name);
+              GoRouter.of(context).push(
+                Routes.kBoardsScreen,
+                extra: {'workspaceId': id, 'workspaceName': name},
+              );
             },
+
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 10.0.h),
               child: Row(

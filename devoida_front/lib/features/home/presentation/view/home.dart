@@ -1,6 +1,7 @@
 import 'package:devoida_front/core/utils/theming/colors.dart';
 import 'package:devoida_front/features/board/presentation/view/BoardTasks.dart';
 import 'package:devoida_front/features/board/presentation/view/board_screen.dart';
+import 'package:devoida_front/features/home/presentation/view/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const WorkspaceScreen(),
     const BoardScreen(),
     Container(),
-    const BoardTasks(),
+    KanbanBoardSimple(),
     Container(),
   ];
 
